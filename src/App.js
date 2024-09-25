@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import SearchBar from './components/SearchBar';
 import NavBar from './components/NavBar';
+//import Background from './Background';
+
 
 function App() {
   return (

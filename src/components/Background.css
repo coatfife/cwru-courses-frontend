@@ -1,0 +1,12 @@
+/* src/Background.css */
+.background-container {
+    position: fixed; /* Keep the background fixed */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-image: url('./assets/background.jpg'); /* Path should be correct */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    z-index: -1; /* Stays behind other content */
+}

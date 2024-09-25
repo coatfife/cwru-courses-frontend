@@ -1,0 +1,19 @@
+/* NavBar.css */
+
+.MuiAppBar-root {
+    background-color: white !important; /* Set the AppBar background to white */
+    box-shadow: rgba(0, 4, 8, 25)  /* Adjusted box shadow */
+  }
+  
+  .MuiButton-root {
+    color: black !important; /* Set button text color to black */
+    text-transform: none !important; /* Prevent buttons from displaying text in all caps */
+  }
+  
+  .create-course-button {
+    background-color: #003071 !important; /* Background hex color */
+    color: white !important; /* Ensure text color is white */
+    border-radius: 100px !important; /* Rounded corners */
+    margin: 10px 24px; /* Optional: Add some margin between buttons */
+  }
+  
