@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.content-container {
+  display: flex;
+  flex-direction: column; /* Stack heading and search bar vertically */
+  align-items: center; /* Center children horizontally */
+  margin-top: 150px; /* Adjust this to move both elements down together */
+}
+
+h1 {
+  margin-bottom: 16px; /* Add space between the heading and search bar */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

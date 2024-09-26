@@ -3,6 +3,6 @@
     display: flex;
     justify-content: center; /* Centers horizontally */
     align-items: flex-start; /* Aligns items to the top */
-    height: 100vh;           /* Full viewport height */
-    margin-top: 150px;       /* Move bar further down */
+    /* Remove height: 100vh; */
+    margin-top: 0; /* Remove margin here to control spacing from App.css */
 }

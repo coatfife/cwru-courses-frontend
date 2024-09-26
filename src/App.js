@@ -1,17 +1,16 @@
 import './App.css';
 import * as React from 'react';
-
 import SearchBar from './components/SearchBar';
 import NavBar from './components/NavBar';
-//import Background from './Background';
-
 
 function App() {
   return (
     <div className="App">
-        <NavBar />
+      <NavBar />
+      <div className="content-container">
         <h1>Rate CWRU Courses</h1>
         <SearchBar />
+      </div>
     </div>
   );
 }
