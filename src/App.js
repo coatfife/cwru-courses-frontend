@@ -1,15 +1,18 @@
 import './App.css';
 import * as React from 'react';
-import SearchBar from './components/SearchBar';
 import NavBar from './components/NavBar';
+import Landing from './components/Landing'
+import CreateCourseListing from './components/CreateCourseListing';
+import { useState } from 'react';
 
 function App() {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div className="App">
-      <NavBar />
+      <NavBar setOpen={setOpenModal} /> 
+      <CreateCourseListing open={openModal} setOpen={setOpenModal} />
       <div className="content-container">
-        <h1>Rate CWRU Courses</h1>
-        <SearchBar />
+        <Landing />
       </div>
     </div>
   );

@@ -5,14 +5,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import './NavBar.css';
 
-export default function NavBar() {
+export default function NavBar({setOpen}) {
+  const handleOpen = () => {
+    setOpen(true);
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ boxShadow: 'none' }}>
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           <Button color="inherit" sx={{ padding: '20px' }}>Home</Button>
           <Button color="inherit" sx={{ padding: '20px' }}>Courses</Button>
-          <Button className="create-course-button" sx={{ padding: '8px 12px' }}>
+          <Button className="create-course-button" sx={{ padding: '8px 12px' }} onClick={handleOpen}>
             Create Course Listing
           </Button>
         </Toolbar>
