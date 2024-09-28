@@ -1,4 +1,4 @@
-/*
+
 import React from 'react';
 import './Background.css'; // Import the CSS file for styling
 
@@ -10,4 +10,3 @@ const Background = () => {
 };
 
 export default Background;
-*/

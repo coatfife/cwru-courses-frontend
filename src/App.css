@@ -39,6 +39,28 @@ h1 {
   margin-bottom: 16px; /* Add space between the heading and search bar */
 }
 
+/* Center the modal on the screen */
+.MuiModal-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Set the width of the Card component (the modal content) */
+.MuiCard-root {
+  width: 800px; /* Adjust width as necessary */
+  max-width: 90%; /* Ensures it is responsive and doesn't overflow */
+  padding: 20px;
+}
+
+
+/* Global padding/margin reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
