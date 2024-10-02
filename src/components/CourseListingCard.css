@@ -1,0 +1,46 @@
+/* CourseListingCard.css */
+
+.card {
+    width: 100%;
+    max-width: 780px; /* Match the search bar's width */
+    margin: 16px auto; /* Center the card and provide some margin */
+    border-radius: 12px; /* Rounded corners */
+    background-color: #F7F8FF; /* Card background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for elevation */
+    transition: box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+.card-content {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    padding: 24px; /* Adjust padding for spacing */
+}
+
+.rating-badge {
+    display: flex;
+    flex-direction: column; /* Stack label and rating vertically */
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    background-color: #003366; /* Background color for the badge */
+    color: white; /* Text color */
+    font-size: 1.4rem; /* Font size for rating */
+    font-weight: bold; /* Bold text */
+    border-radius: 50%; /* Make the badge circular */
+    margin-right: 16px; /* Space between badge and text */
+    position: relative; /* For absolute positioning of the label */
+ 
+}
+
+.rating-label {
+    font-size: 0.7rem; /* Font size for "Overall" label */
+    color: #676767; /* Color for the label */
+    position: absolute; /* Position the label */
+    top: -16px; /* Position it above the badge */
+}
+

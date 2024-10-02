@@ -5,7 +5,7 @@ const courses = [
     {
         title: "Introduction to Data Structures",
         number: "CSDS 233",
-        description: "Some discription",
+        description: "Some description",
         reviews: 30,
         rating: 4.1,
         id: 1

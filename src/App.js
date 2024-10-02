@@ -13,7 +13,7 @@ function App() {
       <NavBar setOpen={setOpenModal} /> 
       <CreateCourseListing open={openModal} setOpen={setOpenModal} />
       <div className="content-container">
-        {true ? <Landing /> : <CourseListings />} 
+        {false ? <Landing /> : <CourseListings />} 
         {/* NOTE TO ALICE: Change true to false in line 16 to see some example course listings. */}
       </div>
     </div>
