@@ -27,11 +27,11 @@ const courses = [
         id: 3
     },
     {
-        title: "Introduction to Data Structures",
-        number: "CSDS 233",
+        title: "Physiology-Biophysics",
+        number: "EBME 201",
         description: "Some discription",
         reviews: 30,
-        rating: 4.1,
+        rating: 3.5,
         id: 4
     }
 ] //example of courses retrieved from the server
