@@ -6,37 +6,68 @@ const courses = [
         title: "Introduction to Data Structures",
         number: "CSDS 233",
         description: "Some description",
-        reviews: 30,
-        rating: 4.1,
-        id: 1
+        reviewCount: 30,
+        id: 1,
+        reviews: [
+            {
+                author: "abc123",
+                id: 1,
+                overall: 5,
+                difficulty: 4,
+                usefulness: 3,
+                tips: "watch lecture",
+                additionalComments: "i love this class",
+                major: "Computer Science",
+            }
+        ]
     },
     {
         title: "Algorithms",
         number: "CSDS 310",
         description: "Algorithms description",
-        reviews: 20,
-        rating: 2.0,
-        id: 2
+        id: 2,
+        reviews: [
+            {
+                author: "abc123",
+                id: 1,
+                overall: 1,
+                difficulty: 3,
+                usefulness: 3,
+                tips: "do the homework",
+                additionalComments: "i hate this class",
+                major: "Computer Science",
+            }
+        ]
     },
     {
         title: "Introducing Islam",
         number: "RLGN 172",
         description: "Introducing Islam description",
-        reviews: 12,
-        rating: 4.5,
-        id: 3
+        id: 3,
+        reviews: [
+        ]
     },
     {
         title: "Physiology-Biophysics",
         number: "EBME 201",
         description: "Some discription",
-        reviews: 30,
-        rating: 3.5,
-        id: 4
+        id: 4,
+        reviews: [
+            {
+                author: "abc123",
+                id: 1,
+                overall: 5,
+                difficulty: 5,
+                usefulness: 5,
+                tips: "watch lecture",
+                additionalComments: "i love this class",
+                major: "Computer Science",
+            }
+        ]
     }
 ] //example of courses retrieved from the server
 
-export default function CourseListings() {
+export default function CourseListings({ setPage }) {
     const cards = courses.map((course) => <CourseListingCard key={course.id} course={course} />)
     return (
         <>

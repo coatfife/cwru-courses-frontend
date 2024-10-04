@@ -2,7 +2,7 @@ import { Modal, Card, CardContent, Typography, FormControl, FormLabel, TextField
 
 export default function CreateCourseListing({ open, setOpen }) {
     const handleClose = () => {
-        setOpen(false);
+        setOpen();
     }
 
     return (
