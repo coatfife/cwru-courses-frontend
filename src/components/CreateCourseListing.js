@@ -1,13 +1,20 @@
 import { Modal, Card, CardContent, Typography, FormControl, FormLabel, TextField, Button, Toolbar } from '@mui/material';
+import ModalContext from '../contexts/ModalContext';
+import { useContext } from 'react';
 
-export default function CreateCourseListing({ open, setOpen }) {
+export default function CreateCourseListing() {
     const handleClose = () => {
-        setOpen();
+        setOpenModal({
+            Modal: null,
+            Review: null,
+        });
     }
+
+    const {setOpenModal} = useContext(ModalContext);
 
     return (
         <Modal
-            open={open}
+            open={true}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             onClose={handleClose}

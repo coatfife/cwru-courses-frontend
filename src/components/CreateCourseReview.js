@@ -1,13 +1,20 @@
 import { Modal, Card, CardContent, Typography, FormControl, FormLabel, TextField, Button, Toolbar, Slider } from '@mui/material';
+import ModalContext from '../contexts/ModalContext';
+import { useContext } from 'react';
 
-export default function CreateCourseReview({ open, setOpen }) {
+export default function CreateCourseReview() {
     const handleClose = () => {
-        setOpen();
+        setOpenModal({
+            Modal: null,
+            Review: null,
+        });
     }
+
+    const {setOpenModal} = useContext(ModalContext);
 
     return (
         <Modal
-            open={open}
+            open={true}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             onClose={handleClose}
@@ -16,7 +23,8 @@ export default function CreateCourseReview({ open, setOpen }) {
           <CardContent sx={{ overflowY: 'auto', maxHeight: '80vh' }}> {/* Allow for overflow */}
                     <FormControl sx={{ width: '100%' }}>
                         <Typography variant='h6' mb={2}><b>Create Course Review</b></Typography>
-                        <Typography mb={3}>Created by: abc123</Typography>
+                        <FormLabel>Post Anonymously?</FormLabel>
+                        {/* I will put a cehckbox here */}
                         
                         <FormLabel>Overall Rating (1 = worst, 10 = best):</FormLabel>
                         <Slider

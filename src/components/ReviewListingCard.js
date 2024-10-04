@@ -1,10 +1,19 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import './CourseListingCard.css';
+import { useContext } from "react";
+import ModalContext from "../contexts/ModalContext";
 
 export default function ReviewListingCard({ review }) {
+    const {setOpenModal} = useContext(ModalContext)
 
+    const handleClick = () => {
+        setOpenModal({
+            Modal: "ViewReview",
+            Review: review
+        })
+    }
     return (
-        <Card className="card">
+        <Card className="card" onClick={handleClick}>
             <Box className="card-content">
                 <Box className="rating-badge">
                     <Typography>{review.overall}</Typography>

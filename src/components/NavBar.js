@@ -6,14 +6,18 @@ import Button from '@mui/material/Button';
 import './NavBar.css';
 import PageContext from '../contexts/PageContext';
 import { useContext } from 'react';
+import ModalContext from '../contexts/ModalContext';
 
-export default function NavBar({setOpen}) {
-
+export default function NavBar() {
+  const {setOpenModal} = useContext(ModalContext);
   const isCoursePage = React.useContext(PageContext).page.Page === "CoursePage"
   const handleOpen = () => {
     let modal = "Listing"
     if (isCoursePage) modal = "Review"
-    setOpen(modal);
+    setOpenModal({
+      Modal: modal,
+      Review: null
+    })
   }
 
   const { setPage } = useContext(PageContext);

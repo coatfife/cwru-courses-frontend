@@ -8,12 +8,17 @@ import { useState } from 'react';
 import CoursePage from './components/CoursePage';
 import PageContext from './contexts/PageContext';
 import CreateCourseReview from './components/CreateCourseReview';
+import ModalContext from './contexts/ModalContext';
+import CourseReview from './components/CourseReview';
 
 
 function App() {
-  const [openModal, setOpenModal] = useState(null);
+  const [openModal, setOpenModal] = useState({
+    Modal: null,
+    Review: null
+  });
   const [page, setPage] = useState({
-    Page: "CourseListings",
+    Page: "Landing",
     Course: null
   })
 
@@ -31,11 +36,13 @@ function App() {
   }
 
   const getModal = () => {
-    switch (openModal) {
+    switch (openModal.Modal) {
       case "Review":
-        return <CreateCourseReview open={openModal} setOpen={setOpenModal} />
+        return <CreateCourseReview />
       case "Listing":
-        return <CreateCourseListing open={openModal} setOpen={setOpenModal} />
+        return <CreateCourseListing />
+      case "ViewReview":
+        return <CourseReview review={openModal.Review} />
       default:
         return <></>
     }
@@ -44,9 +51,11 @@ function App() {
   return (
     <div className="App">
       <PageContext.Provider value={{ page, setPage }} >
-        <NavBar setOpen={setOpenModal} />
-        {getModal()}
-        {getPage()}
+        <ModalContext.Provider value={{openModal, setOpenModal}} >
+          <NavBar />
+          {getModal()}
+          {getPage()}
+        </ModalContext.Provider>
       </PageContext.Provider>
     </div>
   );
