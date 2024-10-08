@@ -4,12 +4,13 @@ import NavBar from './components/NavBar';
 import Landing from './components/Landing'
 import CreateCourseListing from './components/CreateCourseListing';
 import CourseListings from './components/CourseListings'
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import CoursePage from './components/CoursePage';
 import PageContext from './contexts/PageContext';
 import CreateCourseReview from './components/CreateCourseReview';
 import ModalContext from './contexts/ModalContext';
 import CourseReview from './components/CourseReview';
+import { getCourses, createCourse, updateCourse, deleteCourse, createReview, updateReview, deleteReview } from "./api/api"
 
 
 function App() {
@@ -47,6 +48,28 @@ function App() {
         return <></>
     }
   }
+
+  // Fetch the courses from the API and log them
+  useEffect(() => {
+    // Fetch the courses when the component mounts
+    const fetchCourses = async () => {
+      const course = {
+        "courseId": "makoye",
+        "title": "Introduction to Software Engineering",
+        "description": "This course covers the fundamental concepts of software engineering, including design patterns, development methodologies, and project management.",
+        "createdBy": "professor123",
+        "aliases": ["SE101", "SoftwareEng"],
+        "prerequisites": ["CS101", "CS102"],
+        "reviews": []
+      }
+      const res = await createCourse(course);
+      console.log(res);
+    };
+
+    fetchCourses().then(() => console.log("Courses fetched"));
+  }, []);
+
+
 
   return (
     <div className="App">
