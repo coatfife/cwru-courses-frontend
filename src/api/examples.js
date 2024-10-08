@@ -7,6 +7,7 @@ import {
     updateReview,
     deleteReview
 } from "./api";
+import { v4 as uuidv4 } from 'uuid';
 
 // 1. Get all courses
 const getAllCoursesExample = async () => {
@@ -16,16 +17,16 @@ const getAllCoursesExample = async () => {
 
 // 2. Get a specific course by courseId
 const getCourseByIdExample = async (courseId) => {
-    //course ID should be a string
+    // courseId should be a string
     const response = await getCourses(courseId);
     console.log(`Course ${courseId}:`, response);
 };
 
 // 3. Create a new course
 const createCourseExample = async () => {
-    //make sure all the below values are provide. if no aliases, prerequisites, or reviews provide an empty array []
+    // Generate a unique course ID using uuid
     const newCourse = {
-        courseId: "CDSE3030",
+        courseId: uuidv4(),  // Dynamically generated courseId
         title: "Advanced Programming",
         createdBy: "professor3",
         description: "A deep dive into advanced programming techniques.",
@@ -40,7 +41,7 @@ const createCourseExample = async () => {
 
 // 4. Update a course by courseId
 const updateCourseExample = async () => {
-    const courseId = "CDSE3030";
+    const courseId = "ed65f872-dff1-47d0-9aee-b481cf2afde4";
     const updatedCourseData = {
         title: "Advanced Programming Techniques",
         description: "Updated description for advanced programming.",
@@ -53,16 +54,17 @@ const updateCourseExample = async () => {
 
 // 5. Delete a course by courseId
 const deleteCourseExample = async () => {
-    const courseId = "CDSE3030";  // Example course ID to delete
+    const courseId = "ed65f872-dff1-47d0-9aee-b481cf2afde4";  // Example course ID to delete
     const response = await deleteCourse(courseId);
     console.log(`Delete Course ${courseId} Response:`, response);
 };
 
 // 6. Create a review for a course
 const createReviewExample = async () => {
-    const courseId = "CDSE1013";  // Example course ID to add review to
+    const courseId = "ed65f872-dff1-47d0-9aee-b481cf2afde4";  // Example course ID to add review to
+    // Generate a unique review ID using uuid
     const newReview = {
-        reviewId: "review123",
+        reviewId: uuidv4(),  // Dynamically generated reviewId
         author: "student1",
         content: "This course was challenging and insightful.",
         rating: 5
@@ -74,8 +76,8 @@ const createReviewExample = async () => {
 
 // 7. Update a review by reviewId
 const updateReviewExample = async () => {
-    const courseId = "CDSE1013";
-    const reviewId = "review123";  // Example review ID to update
+    const courseId = "ed65f872-dff1-47d0-9aee-b481cf2afde4";
+    const reviewId = "ef65f872-dff1-47d0-9aee-b481cf2afde7";  // Example review ID to update
     const updatedReviewData = {
         content: "Updated review content for the course.",
         rating: 4
@@ -87,9 +89,8 @@ const updateReviewExample = async () => {
 
 // 8. Delete a review by reviewId
 const deleteReviewExample = async () => {
-    const courseId = "CDSE1013";
-    const reviewId = "review123";  // Example review ID to delete
+    const courseId = "ed65f872-dff1-47d0-9aee-b481cf2afde4";
+    const reviewId = "ef65f872-dff1-47d0-9aee-b481cf2afde7";  // Example review ID to delete
     const response = await deleteReview(courseId, reviewId);
     console.log(`Delete Review ${reviewId} for Course ${courseId} Response:`, response);
 };
-
