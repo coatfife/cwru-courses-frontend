@@ -1,29 +1,30 @@
 /* NavBar.css */
 
 .MuiAppBar-root {
-    background-color: #ffffff !important; /* Set the AppBar background to white */
-    box-shadow: none; /* Box shadow with spread and offset */
-    padding: 12px; /* Add padding */
-  }
-  
-  .MuiButton-root {
-    color: black !important; /* Set button text color to black */
-    text-transform: none !important; /* Prevent buttons from displaying text in all caps */
-  }
-  
-  .create-course-button {
-    background-color: #003071 !important; /* Background hex color */
-    color: white !important; /* Ensure text color is white */
-    border-radius: 100px !important; /* Rounded corners */
-    margin: 10px 24px; /* Optional: Add some margin between buttons */
-  }
-  
-  /* General nav-button styles */
+  background-color: #ffffff !important; /* Set the AppBar background to white */
+  box-shadow: none; /* Remove shadow */
+  padding: 12px; /* Add padding */
+}
+
+.MuiButton-root {
+  color: black !important; /* Set button text color to black */
+  text-transform: none !important; /* Prevent buttons from displaying text in all caps */
+}
+
+.create-course-button {
+  background-color: #003071 !important; /* Background hex color */
+  color: white !important; /* Ensure text color is white */
+  border-radius: 100px !important; /* Rounded corners */
+  margin-left: 12px !important; /* Add margin-left to separate it from the previous buttons */
+}
+
+/* General nav-button styles */
 .nav-button {
   padding: 20px;
-  color: #fff;
+  color: #000; /* Set text color */
   font-weight: normal;
   transition: color 0.3s ease, font-weight 0.3s ease; /* Smooth transition */
+  margin-right: 24px; /* Add margin between nav buttons */
 }
 
 /* Styles for the active page */
