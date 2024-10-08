@@ -9,41 +9,57 @@ import { useContext } from 'react';
 import ModalContext from '../contexts/ModalContext';
 
 export default function NavBar() {
-  const {setOpenModal} = useContext(ModalContext);
-  const isCoursePage = React.useContext(PageContext).page.Page === "CoursePage"
+  const { setOpenModal } = useContext(ModalContext);
+  const { page, setPage } = useContext(PageContext);
+  const isCoursePage = page.Page === "CoursePage";
+
   const handleOpen = () => {
-    let modal = "Listing"
-    if (isCoursePage) modal = "Review"
+    let modal = "Listing";
+    if (isCoursePage) modal = "Review";
     setOpenModal({
       Modal: modal,
-      Review: null
-    })
-  }
-
-  const { setPage } = useContext(PageContext);
+      Review: null,
+    });
+  };
 
   const handleHome = () => {
     setPage({
       Page: "Landing",
-      Course: null
-    })
-  }
+      Course: null,
+    });
+  };
 
   const handleCourses = () => {
     setPage({
       Page: "CourseListings",
-      Course: null
-    })
-  }
+      Course: null,
+    });
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ boxShadow: 'none' }}>
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
-          <Button color="inherit" sx={{ padding: '20px' }} onClick={handleHome}>Home</Button>
-          <Button color="inherit" sx={{ padding: '20px' }} onClick={handleCourses}>Courses</Button>
-          <Button className="create-course-button" sx={{ padding: '8px 12px' }} onClick={handleOpen}>
-            Create Course {isCoursePage ? "Review" : "Listing"}
+          {/* Add class based on active page */}
+          <Button
+            className={page.Page === 'Landing' ? 'nav-button active' : 'nav-button'}
+            onClick={handleHome}
+          >
+            Home
+          </Button>
+
+          <Button
+            className={page.Page === 'CourseListings' ? 'nav-button active' : 'nav-button'}
+            onClick={handleCourses}
+          >
+            Courses
+          </Button>
+
+          <Button
+            className="create-course-button"
+            onClick={handleOpen}
+          >
+            Create {isCoursePage ? 'Review' : 'Course Listing'}
           </Button>
         </Toolbar>
       </AppBar>

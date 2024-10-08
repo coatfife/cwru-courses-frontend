@@ -1,0 +1,37 @@
+/* Card styling */
+.MuiCard-root {
+    padding: 24px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Typography for Title */
+.MuiTypography-h6 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #333; /* Darker text for the title */
+}
+
+/* Form Control */
+.MuiFormControl-root {
+    margin-bottom: 16px;
+}
+
+/* Input Fields */
+.MuiInputBase-input {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Close button */
+.MuiButton-colorInherit {
+    color: #555;
+}

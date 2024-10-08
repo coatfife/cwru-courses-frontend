@@ -3,7 +3,7 @@
 .MuiAppBar-root {
     background-color: #ffffff !important; /* Set the AppBar background to white */
     box-shadow: none; /* Box shadow with spread and offset */
-    padding: 8px; /* Add padding */
+    padding: 12px; /* Add padding */
   }
   
   .MuiButton-root {
@@ -18,3 +18,16 @@
     margin: 10px 24px; /* Optional: Add some margin between buttons */
   }
   
+  /* General nav-button styles */
+.nav-button {
+  padding: 20px;
+  color: #fff;
+  font-weight: normal;
+  transition: color 0.3s ease, font-weight 0.3s ease; /* Smooth transition */
+}
+
+/* Styles for the active page */
+.nav-button.active {
+  color: #6f00ff; /* Highlight color */
+  font-weight: bold; /* Make text bold */
+}
