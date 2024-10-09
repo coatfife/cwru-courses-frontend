@@ -66,3 +66,8 @@ export const updateReview = async (courseId, reviewId, updatedData) => {
 export const deleteReview = async (courseId, reviewId) => {
     return await sendRequest({}, "DELETE", `reviews/?courseId=${courseId}&reviewId=${reviewId}`);
 };
+
+// Function to search a course matching a query
+export const searchCourse = async (query) => {
+    return await sendRequest({query}, "POST", "search");
+};

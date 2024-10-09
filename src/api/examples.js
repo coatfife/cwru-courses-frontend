@@ -5,7 +5,8 @@ import {
     deleteCourse,
     createReview,
     updateReview,
-    deleteReview
+    deleteReview,
+    searchCourse
 } from "./api";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -93,4 +94,19 @@ const deleteReviewExample = async () => {
     const reviewId = "ef65f872-dff1-47d0-9aee-b481cf2afde7";  // Example review ID to delete
     const response = await deleteReview(courseId, reviewId);
     console.log(`Delete Review ${reviewId} for Course ${courseId} Response:`, response);
+};
+
+// 9. Search for courses matching a query
+const searchCourseExample = async () => {
+    const query = "Introduction to Software Engineering";  // Example search query
+
+    // Send search request with the query
+    const response = await searchCourse(query);
+
+    // Log the search results
+    if (response && response.length > 0) {
+        console.log("Search Results:", response);
+    } else {
+        console.log("No courses found for the given search query.");
+    }
 };
