@@ -1,12 +1,12 @@
 import { auth } from './config'; // Import your firebase config
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification, onAuthStateChanged, signOut } from 'firebase/auth';
 
 // Helper function to validate @case.edu email
 const isCaseEduEmail = (email) => {
   return email.endsWith('@case.edu');
 };
 
-// Sign-up function
+// Sign-up function with email verification
 export const signUpWithEmail = async (email, password) => {
   try {
     if (!isCaseEduEmail(email)) {
@@ -15,7 +15,11 @@ export const signUpWithEmail = async (email, password) => {
 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    console.log('User signed up:', user);
+
+    // Send verification email
+    await sendEmailVerification(user);
+    console.log('Verification email sent:', user.email);
+
     return user;
   } catch (error) {
     console.error('Error signing up:', error);
@@ -23,7 +27,6 @@ export const signUpWithEmail = async (email, password) => {
   }
 };
 
-// Login function
 export const loginWithEmail = async (email, password) => {
   try {
     if (!isCaseEduEmail(email)) {
@@ -32,6 +35,12 @@ export const loginWithEmail = async (email, password) => {
 
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+
+    // Check if email is verified
+    if (!user.emailVerified) {
+      throw new Error('Email not verified. Please check your inbox and verify your email before logging in.');
+    }
+
     console.log('User logged in:', user);
     return user;
   } catch (error) {
