@@ -4,65 +4,74 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import './NavBar.css';
-import PageContext from '../contexts/PageContext';
-import { useContext } from 'react';
-import ModalContext from '../contexts/ModalContext';
+import {useNavigate} from "react-router-dom";
+import {useContext, useState} from "react";
+import CreateCourseListing from "./CreateCourseListing";
+import {logout} from '../firebase/firebase';
+import {CourseContext} from "../contexts/CourseContext";
 
 export default function NavBar() {
-  const { setOpenModal } = useContext(ModalContext);
-  const { page, setPage } = useContext(PageContext);
-  const isCoursePage = page.Page === "CoursePage";
+    const navigate = useNavigate();
+    const {setUser, fetchCourses} = useContext(CourseContext);
 
-  const handleOpen = () => {
-    let modal = "Listing";
-    if (isCoursePage) modal = "Review";
-    setOpenModal({
-      Modal: modal,
-      Review: null,
-    });
-  };
+    const [modalOpen, setModalOpen] = useState(false);
 
-  const handleHome = () => {
-    setPage({
-      Page: "Landing",
-      Course: null,
-    });
-  };
+    const handleOpenModal = () => setModalOpen(true);
+    const handleCloseModal = () => setModalOpen(false);
 
-  const handleCourses = () => {
-    setPage({
-      Page: "CourseListings",
-      Course: null,
-    });
-  };
+    const handleOpen = () => {
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ boxShadow: 'none' }}>
-        <Toolbar sx={{ justifyContent: 'flex-end' }}>
-          {/* Add class based on active page */}
-          <Button
-            className={page.Page === 'Landing' ? 'nav-button active' : 'nav-button'}
-            onClick={handleHome}
-          >
-            Home
-          </Button>
+    };
 
-          <Button
-            className={page.Page === 'CourseListings' ? 'nav-button active' : 'nav-button'}
-            onClick={handleCourses}
-          >
-            Courses
-          </Button>
+    const handleHome = async() => {
+        await fetchCourses()
+       navigate('/');
+    };
 
-          <Button
-            className="create-course-button"
-            onClick={handleOpen}
-          >
-            Create {isCoursePage ? 'Review' : 'Course Listing'}
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+    const handleCourses = async () => {
+        await fetchCourses()
+        navigate('/courses');
+    };
+
+    const handleLogout = ()=>{
+        logout();
+        setUser(null);
+    }
+
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" sx={{ boxShadow: 'none' }}>
+                <Toolbar sx={{ justifyContent: 'flex-end' }}>
+                    {/* Add class based on active page */}
+                    <Button
+                        className='nav-button'
+                        onClick={handleHome}
+                    >
+                        Home
+                    </Button>
+
+                    <Button
+                        className='nav-button'
+                        onClick={handleCourses}
+                    >
+                        Courses
+                    </Button>
+
+                    <Button
+                        className="create-course-button"
+                        onClick={handleOpenModal}
+                    >
+                        Create Course Listing
+                    </Button>
+                    <Button
+                        className="create-course-button"
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </Button>
+                    <CreateCourseListing open={modalOpen} onClose={handleCloseModal} />
+                </Toolbar>
+            </AppBar>
+        </Box>
+    );
 }

@@ -13,13 +13,9 @@ export default function CourseListingCard({ course }) {
         return rating.toFixed(1)
     }
 
-    const { setPage } = useContext(PageContext);
 
     const handleClick = (e) => {
-        setPage({
-            Page: "CoursePage",
-            Course: course
-        })
+
     }
 
     return (
@@ -39,7 +35,7 @@ export default function CourseListingCard({ course }) {
                 </Box>
                 <CardContent sx={{ textAlign: 'left' }}>
                     <Typography sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '4px' }}>
-                        {course.number} - {course.title}
+                        {course.title}
                     </Typography>
                     <Typography sx={{ fontSize: '1rem', color: '#666', marginBottom: '8px' }}>
                         {course.description}

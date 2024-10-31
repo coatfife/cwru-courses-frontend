@@ -1,64 +1,37 @@
 import './App.css';
 import * as React from 'react';
 import NavBar from './components/NavBar';
-import Landing from './components/Landing'
+import Landing from './components/Landing';
 import CreateCourseListing from './components/CreateCourseListing';
-import CourseListings from './components/CourseListings'
-import {useEffect, useState} from 'react';
+import CourseListings from './components/CourseListings';
+import {useContext, useEffect, useState} from 'react';
 import CoursePage from './components/CoursePage';
 import PageContext from './contexts/PageContext';
 import CreateCourseReview from './components/CreateCourseReview';
 import ModalContext from './contexts/ModalContext';
 import CourseReview from './components/CourseReview';
-import { getCourses, createCourse, updateCourse, deleteCourse, createReview, updateReview, deleteReview } from "./api/api"
-
+import { getCourses, createCourse, updateCourse, deleteCourse, createReview, updateReview, deleteReview } from "./api/api";
+import AuthPage from './components/AuthPage';
+import SearchCoursesPage from './components/SearchCoursesPage';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {CourseContext} from "./contexts/CourseContext";
 
 function App() {
-  const [openModal, setOpenModal] = useState({
-    Modal: null,
-    Review: null
-  });
-  const [page, setPage] = useState({
-    Page: "Landing",
-    Course: null
-  })
-
-  const getPage = () => {
-    switch (page.Page) {
-      case "Landing":
-        return <Landing />
-      case "CourseListings":
-        return <CourseListings />
-      case "CoursePage":
-        return <CoursePage course={page.Course} />
-      default:
-        return <></>
-    }
-  }
-
-  const getModal = () => {
-    switch (openModal.Modal) {
-      case "Review":
-        return <CreateCourseReview />
-      case "Listing":
-        return <CreateCourseListing />
-      case "ViewReview":
-        return <CourseReview review={openModal.Review} />
-      default:
-        return <></>
-    }
-  }
+    const {user} = useContext(CourseContext);
+    console.log("user", user);
 
   return (
-    <div className="App">
-      <PageContext.Provider value={{ page, setPage }} >
-        <ModalContext.Provider value={{openModal, setOpenModal}} >
-          <NavBar />
-          {getModal()}
-          {getPage()}
-        </ModalContext.Provider>
-      </PageContext.Provider>
-    </div>
+      <div className="App">
+          {!user ? <AuthPage/> :
+      <BrowserRouter>
+          <NavBar/>
+          <Routes>
+              <Route path="/" element={<Landing/>} />
+              <Route path="/courses" element={<CourseListings />} />
+          </Routes>
+      </BrowserRouter>
+          }
+      </div>
   );
 }
 
