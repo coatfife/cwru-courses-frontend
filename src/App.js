@@ -18,7 +18,6 @@ import {CourseContext} from "./contexts/CourseContext";
 
 function App() {
     const {user} = useContext(CourseContext);
-    console.log("user", user);
 
   return (
       <div className="App">
@@ -28,6 +27,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Landing/>} />
               <Route path="/courses" element={<CourseListings />} />
+              <Route path="/courses/:id" element={<CoursePage />} />
           </Routes>
       </BrowserRouter>
           }

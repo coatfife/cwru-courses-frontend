@@ -8,38 +8,57 @@ import {
     updateReview,
     deleteReview,
     searchCourse
-} from '../api/api'
-import {getCurrentUser} from "../firebase/firebase";
+} from '../api/api';
+import { getCurrentUser } from "../firebase/firebase";
 
-// Create a context for calendars
+// Create a context for courses
 export const CourseContext = createContext();
 
 export const CourseProvider = ({ children }) => {
-    const [courses, setCourse] = useState([]);
-    const [user, setUser] = useState(getCurrentUser());
+    const [courses, setCourses] = useState(() => {
+        // Retrieve courses from local storage if available
+        const storedCourses = localStorage.getItem('courses');
+        return storedCourses ? JSON.parse(storedCourses) : [];
+    });
 
-    const createSingleCourse = async (course)=>{
-        await createCourse(course)
-        await fetchCourses()
-    }
+    const [user, setUser] = useState(() => {
+        // Retrieve user from local storage if available, otherwise get the current user from Firebase
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : getCurrentUser();
+    });
 
-    const fetchCourses = async ()=>{
-       const res =  await getCourses()
-        setCourse(res)
-    }
+    const createSingleCourse = async (course) => {
+        await createCourse(course);
+        await fetchCourses();
+    };
 
-    const search = async (query)=>{
-        const res = await searchCourse(query)
-        setCourse(res);
-    }
+    const fetchCourses = async () => {
+        const res = await getCourses();
+        setCourses(res);
+    };
 
-    useEffect(()=>{
-        const fetch = async ()=>{
-            await fetchCourses();
+    const search = async (query) => {
+        const res = await searchCourse(query);
+        setCourses(res);
+    };
+
+    // Update local storage whenever the user state changes
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
         }
+    }, [user]);
 
-        fetch();
-    }, [user])
+    // Update local storage whenever the courses state changes
+    useEffect(() => {
+        localStorage.setItem('courses', JSON.stringify(courses));
+    }, [courses]);
+
+    useEffect(() => {
+        fetchCourses();
+    }, []);
 
     return (
         <CourseContext.Provider
@@ -50,7 +69,10 @@ export const CourseProvider = ({ children }) => {
                 fetchCourses,
                 user,
                 setUser,
-                search
+                search,
+                createReview,
+                deleteReview,
+                updateReview,
             }}
         >
             {children}

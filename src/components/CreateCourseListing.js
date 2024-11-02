@@ -32,7 +32,7 @@ export default function CreateCourseListing({ open, onClose }) {
         const newCourse = {
             courseId: uuidv4(),
             title: formValues.name,
-            createdBy: user || "elm102@case.edu",
+            createdBy: user?.email || "elm102@case.edu",
             description: formValues.description,
             aliases: alias,
             prerequisites: prereq,
