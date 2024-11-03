@@ -1,7 +1,7 @@
 import CourseListingCard from './CourseListingCard'
 import SearchBar from "./SearchBar"
 
-const courses = [
+export const courses = [
     {
         title: "Introduction to Data Structures",
         number: "CSDS 233",

@@ -1,4 +1,4 @@
-import { Modal, Card, CardContent, Typography, FormControl, FormLabel, Button, Toolbar, Slider } from '@mui/material';
+import { Modal, Card, CardContent, Typography, FormControl, FormLabel, Button, Toolbar, Slider, CardActionArea } from '@mui/material';
 import { useContext } from 'react';
 import ModalContext from '../contexts/ModalContext';
 

@@ -11,9 +11,10 @@ import CreateCourseReview from './components/CreateCourseReview';
 import ModalContext from './contexts/ModalContext';
 import CourseReview from './components/CourseReview';
 import { getCourses, createCourse, updateCourse, deleteCourse, createReview, updateReview, deleteReview } from "./api/api"
+import { useLoaderData } from 'react-router-dom';
+import { courseDetails } from './components/CourseListings';
 
-
-function App() {
+function App(props) {
   const [openModal, setOpenModal] = useState({
     Modal: null,
     Review: null
@@ -23,14 +24,14 @@ function App() {
     Course: null
   })
 
-  const getPage = () => {
+  const getPage = (page) => {
     switch (page.Page) {
       case "Landing":
         return <Landing />
       case "CourseListings":
         return <CourseListings />
       case "CoursePage":
-        return <CoursePage course={page.Course} />
+        return <CoursePage />
       default:
         return <></>
     }
@@ -55,7 +56,7 @@ function App() {
         <ModalContext.Provider value={{openModal, setOpenModal}} >
           <NavBar />
           {getModal()}
-          {getPage()}
+          {getPage(props.page)}
         </ModalContext.Provider>
       </PageContext.Provider>
     </div>

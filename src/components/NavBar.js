@@ -7,6 +7,7 @@ import './NavBar.css';
 import PageContext from '../contexts/PageContext';
 import { useContext } from 'react';
 import ModalContext from '../contexts/ModalContext';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   const { setOpenModal } = useContext(ModalContext);
@@ -45,14 +46,15 @@ export default function NavBar() {
             className={page.Page === 'Landing' ? 'nav-button active' : 'nav-button'}
             onClick={handleHome}
           >
-            Home
-          </Button>
+            <Link to={"/"}>Home</Link>
+          </Button> 
+          
 
           <Button
             className={page.Page === 'CourseListings' ? 'nav-button active' : 'nav-button'}
             onClick={handleCourses}
           >
-            Courses
+            <Link to={"/courses"}>Courses</Link>
           </Button>
 
           <Button
