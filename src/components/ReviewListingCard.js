@@ -1,17 +1,20 @@
 import { Card, CardContent, Typography, Box, CardActionArea, Button } from "@mui/material";
 import './CourseListingCard.css';
+//import './ButtonStyles.css'; // Import for button styles
 import { useContext } from "react";
 import ModalContext from "../contexts/ModalContext";
+import './ReviewListingCard.css';
 
 export default function ReviewListingCard({ review }) {
-    const {setOpenModal} = useContext(ModalContext)
+    const { setOpenModal } = useContext(ModalContext);
 
     const handleClick = () => {
         setOpenModal({
             Modal: "ViewReview",
             Review: review
-        })
-    }
+        });
+    };
+
     return (
         <Card className="card" onClick={handleClick}>
             <CardActionArea>
@@ -36,10 +39,10 @@ export default function ReviewListingCard({ review }) {
                             Click to view more
                         </Typography>
                     </CardContent>
-                    <Button variant="contained" color="succes">
+                    <Button variant="contained" className="EditButton">
                         Edit
                     </Button>
-                    <Button variant="contained" color="error">
+                    <Button variant="contained" className="deleteButton">
                         Delete
                     </Button>
                 </Box>
