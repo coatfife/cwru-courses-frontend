@@ -11,8 +11,7 @@ const AuthPage = () => {
 
   const handleSignUp = async () => {
     try {
-      const user = await signUpWithEmail(email, password);
-      setUser(user);
+      await signUpWithEmail(email, password);
       setError('');
     } catch (error) {
       setError(error.message);
