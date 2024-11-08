@@ -3,42 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { courses } from './components/CourseListings';
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App page={{
-      Page: "Landing"
-    }} />
-  },
-  {
-    path: "courses",
-    element: <App page={{
-      Page: "CourseListings"
-    }} />,
-  },
-  {
-    path: "pages/:id",
-    element: <App page={{
-      Page: "CoursePage"
-    }} />,
-    loader: ({params}) => {
-      console.log(params.id)
-      return courses.find((element) => {
-        return element.id == params.id
-      })
-    }
-  }
-])
+import {CourseProvider} from "./contexts/CourseContext";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+      <CourseProvider>
+    <App />
+      </CourseProvider>
   </React.StrictMode>
 );
 
