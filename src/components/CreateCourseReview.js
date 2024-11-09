@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useState, useContext, useEffect } from 'react';
 import { CourseContext } from "../contexts/CourseContext";
-import { createReview, updateReview } from "../api/api"; // Ensure updateReview is imported
+import { createReview, updateReview } from "../api/api";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CreateCourseReview({ onClose, course, review }) {
@@ -45,11 +45,22 @@ export default function CreateCourseReview({ onClose, course, review }) {
     }, [review]);
 
     const handleSubmit = async () => {
-        // Check if editing a review or creating a new one
+        // Helper function for formatting date
+        const formatDate = (date) => {
+            return new Intl.DateTimeFormat('en-US', {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }).format(date);
+        };
+
         if (review) {
-            // If editing, update the review object
             const updatedReview = {
-                reviewId: review.reviewId, // Keep the same ID for updating
+                reviewId: review.reviewId,
                 createdBy: user.email,
                 overall: overallRating,
                 difficulty: difficultyRating,
@@ -62,9 +73,8 @@ export default function CreateCourseReview({ onClose, course, review }) {
                 professor,
             };
 
-            await updateReview(course.courseId, review.reviewId, updatedReview); // Call the update function
+            await updateReview(course.courseId, review.reviewId, updatedReview);
         } else {
-            // Construct new review object for creation
             const newReview = {
                 reviewId: uuidv4(),
                 createdBy: user.email,
@@ -75,15 +85,15 @@ export default function CreateCourseReview({ onClose, course, review }) {
                 anonymous,
                 additionalComments,
                 tips,
-                createdAt: new Date().toISOString(),
+                createdAt: formatDate(new Date()), // Use formatted date
                 professor,
             };
 
-            await createReview(course.courseId, newReview); // Call the create function
+            await createReview(course.courseId, newReview);
         }
 
         await fetchCourses();
-        onClose(); // Close the modal after processing
+        onClose();
     };
 
     return (
@@ -173,7 +183,14 @@ export default function CreateCourseReview({ onClose, course, review }) {
                         <Button
                             variant="contained"
                             onClick={handleSubmit}
-                            sx={{ mt: 2 }}
+                            sx={{
+                                mt: 2,
+                                backgroundColor: '#003071',
+                                color: 'white !important',
+                                '&:hover': {
+                                    backgroundColor: '#054398'
+                                },
+                            }}
                         >
                             {review ? "Update Review" : "Submit Review"}
                         </Button>

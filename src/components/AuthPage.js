@@ -62,9 +62,21 @@ const AuthPage = () => {
         <Button variant="outlined" onClick={handleSignIn} fullWidth sx={{ mt: 2 }}>
           Sign In
         </Button>
-          <Button variant="contained" onClick={handleSignUp} fullWidth sx={{ mt: 2 }}>
-              Sign Up
-          </Button>
+        <Button
+          variant="contained"
+          onClick={handleSignUp}
+          fullWidth
+          sx={{
+            mt: 2,
+            backgroundColor: '#003071',  
+            color: 'white !important',               
+            '&:hover': {
+              backgroundColor: '#054398'  
+            }
+          }}
+        >
+          Sign Up
+        </Button>
         <Button variant="text" onClick={handleForgotPassword} fullWidth sx={{ mt: 2 }}>
           Forgot Password?
         </Button>

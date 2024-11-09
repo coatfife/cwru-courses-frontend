@@ -15,7 +15,18 @@
   background-color: #003071 !important; /* Background hex color */
   color: white !important; /* Ensure text color is white */
   border-radius: 100px !important; /* Rounded corners */
+  padding: 24px 20px;
   margin-left: 12px !important; /* Add margin-left to separate it from the previous buttons */
+  min-width: 96px !important;
+}
+
+.logout-button {
+  background-color: #546de7 !important; /* Red background for logout */
+  color: white !important; /* White text */
+  border-radius: 100px !important; /* Rounded corners */
+  margin-left: 12px !important; /* Add space between buttons */
+  padding: 24px 20px; /* Adjust padding for consistency */
+  min-width: 96px !important;
 }
 
 /* General nav-button styles */
@@ -27,7 +38,6 @@
   margin-right: 24px; /* Add margin between nav buttons */
 }
 
-/* Styles for the active page */
 .nav-button.active {
   color: #6f00ff; /* Highlight color */
   font-weight: bold; /* Make text bold */

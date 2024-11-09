@@ -1,9 +1,0 @@
-.EditButton {
-    margin-right: 16px !important; /* Adds spacing to the right of each button */
-    background-color: #F7F8FF !important; /* Custom green color for the "Edit" button */
-}
-
-.deleteButton {
-    background-color: #B93030 !important; /* Custom red color for the "Delete" button */
-    color: white !important;
-}

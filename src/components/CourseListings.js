@@ -20,7 +20,7 @@ export default function CourseListings() {
                     bgcolor="background.default"
                     color="text.secondary"
                 >
-                    <Typography variant="h5">No Courses Found!</Typography>
+                    <Typography variant="h5">No Courses Found! Click the 'Create Course Listing Button' to create one. </Typography>
                 </Box>
             </>
         );
