@@ -1,0 +1,43 @@
+/* Background styling for the entire auth page */
+.auth-container {
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     background: linear-gradient(135deg, #51a6f0, #76e1c4, #ffffff);
+    color: white;
+}
+
+/* Centered form container */
+.auth-form {
+    background-color: white;
+    color: black;
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Welcome header and subheader */
+.auth-header {
+    margin-bottom: 1rem;
+}
+
+.auth-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #003071;
+}
+
+.auth-header h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #666;
+}
+
+/* Button and input spacing */
+.auth-form .MuiButton-root {
+    margin-top: 1rem;
+}
