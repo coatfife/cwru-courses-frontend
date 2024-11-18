@@ -4,9 +4,12 @@ import {useContext, useState} from "react";
 import PageContext from "../contexts/PageContext";
 import CreateCourseReview from "./CreateCourseReview";
 import {useNavigate} from "react-router-dom";
+import {CourseContext} from "../contexts/CourseContext";
 
 export default function CourseListingCard({ course }) {
     const navigate = useNavigate();
+    const {user} = useContext(CourseContext);
+    const userHasReviewed = course?.reviews?.some((review)=>review.createdBy === user?.email);
     const calculateRating = (ratingName) => {
         if (course.reviews.length === 0) return "--";
         let rating = 0;
@@ -14,6 +17,7 @@ export default function CourseListingCard({ course }) {
         rating /= course.reviews.length;
         return rating.toFixed(1);
     };
+
 
     const [isReviewModalOpen, setReviewModalOpen] = useState(false);
 
@@ -55,6 +59,7 @@ export default function CourseListingCard({ course }) {
                     <Typography sx={{ fontSize: '0.85rem', color: '#999', marginBottom: '16px' }}>
                         {course.reviews.length === 1 ? `${course.reviews.length} review` : `${course.reviews.length} reviews`}
                     </Typography>
+                    {!userHasReviewed &&
                     <Button
                         variant="contained"
                         className='create-course-button'
@@ -65,6 +70,7 @@ export default function CourseListingCard({ course }) {
                     >
                         Add Review
                     </Button>
+                    }
                 </CardContent>
             </Box>
         </Card>
