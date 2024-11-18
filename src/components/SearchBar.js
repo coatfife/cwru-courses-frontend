@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import './SearchBar.css';
 import {CourseContext} from "../contexts/CourseContext";
+import {toast} from "react-toastify";
 
 function SearchBar() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -15,8 +16,14 @@ function SearchBar() {
     const {search} = useContext(CourseContext);
 
     const handleSearch = async () => {
-       await search(searchQuery)
-        navigate(`/courses`);
+        try{
+            await search(searchQuery)
+            navigate(`/courses`);
+        }
+        catch(e){
+            toast.error(e.message)
+        }
+
     };
 
     return (

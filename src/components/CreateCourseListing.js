@@ -2,6 +2,7 @@ import {useContext, useState} from 'react';
 import { Modal, Card, CardContent, Typography, FormControl, FormLabel, TextField, Button, Toolbar } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import {CourseContext} from "../contexts/CourseContext";
+import {toast} from "react-toastify";
 
 export default function CreateCourseListing({ open, onClose }) {
     const {createSingleCourse, user} = useContext(CourseContext);
@@ -38,8 +39,14 @@ export default function CreateCourseListing({ open, onClose }) {
             prerequisites: prereq,
             reviews: []
         };
-        await createSingleCourse(newCourse)
-        onClose();  // Close modal after submission
+        try{
+            await createSingleCourse(newCourse)
+            onClose();  // Close modal after submission
+            toast.success("course created successfully!")
+        }
+        catch(e){
+            toast.error("failed to create course")
+        }
     };
 
     return (

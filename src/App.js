@@ -15,6 +15,8 @@ import AuthPage from './components/AuthPage';
 import SearchCoursesPage from './components/SearchCoursesPage';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {CourseContext} from "./contexts/CourseContext";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const {user} = useContext(CourseContext);
@@ -22,15 +24,16 @@ function App() {
   return (
       <div className="App">
           {!user ? <AuthPage/> :
-      <BrowserRouter>
-          <NavBar/>
-          <Routes>
-              <Route path="/" element={<Landing/>} />
-              <Route path="/courses" element={<CourseListings />} />
-              <Route path="/courses/:id" element={<CoursePage />} />
-          </Routes>
-      </BrowserRouter>
+              <BrowserRouter>
+                  <NavBar/>
+                  <Routes>
+                      <Route path="/" element={<Landing/>}/>
+                      <Route path="/courses" element={<CourseListings/>}/>
+                      <Route path="/courses/:id" element={<CoursePage/>}/>
+                  </Routes>
+              </BrowserRouter>
           }
+          <ToastContainer position="bottom-right" />
       </div>
   );
 }

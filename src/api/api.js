@@ -23,7 +23,7 @@ const sendRequest = async (data, method, endpoint = "courses/") => {
 
     } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
-        return null;
+        throw new Error(error);
     }
 };
 
@@ -54,7 +54,7 @@ export const deleteCourse = async (courseId) => {
 
 // Function to create a review for a course
 export const createReview = async (courseId, reviewData) => {
-    return await sendRequest(reviewData, "POST", `reviews/?courseId=${courseId}`);
+        return await sendRequest(reviewData, "POST", `reviews/?courseId=${courseId}`);
 };
 
 // Function to update a review by reviewId

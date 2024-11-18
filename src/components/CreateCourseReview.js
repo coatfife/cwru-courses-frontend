@@ -16,6 +16,7 @@ import { useState, useContext, useEffect } from 'react';
 import { CourseContext } from "../contexts/CourseContext";
 import { createReview, updateReview } from "../api/api";
 import { v4 as uuidv4 } from "uuid";
+import {toast} from "react-toastify";
 
 export default function CreateCourseReview({ onClose, course, review }) {
     const { user, fetchCourses, updateReview } = useContext(CourseContext);
@@ -72,8 +73,15 @@ export default function CreateCourseReview({ onClose, course, review }) {
                 createdAt: review.createdAt, // Keep the original createdAt for updates
                 professor,
             };
+            try{
+                await updateReview(course.courseId, review.reviewId, updatedReview);
+                toast.success("Review updated successfully!")
+            }
+            catch(e){
+                toast.error("Failed to update review!")
+            }
 
-            await updateReview(course.courseId, review.reviewId, updatedReview);
+
         } else {
             const newReview = {
                 reviewId: uuidv4(),
@@ -89,7 +97,14 @@ export default function CreateCourseReview({ onClose, course, review }) {
                 professor,
             };
 
-            await createReview(course.courseId, newReview);
+            try{
+                await createReview(course.courseId, newReview);
+                toast.success("review submitted successfully!")
+            }
+            catch(e){
+                toast.error("error creating review!", e.message)
+            }
+
         }
 
         await fetchCourses();

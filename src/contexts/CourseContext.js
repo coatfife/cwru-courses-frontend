@@ -33,13 +33,26 @@ export const CourseProvider = ({ children }) => {
     };
 
     const fetchCourses = async () => {
-        const res = await getCourses();
-        setCourses(res);
+        try{
+            const res = await getCourses();
+            setCourses(res);
+        }
+        catch(e){
+            console.log(e);
+        }
+
     };
 
     const search = async (query) => {
-        const res = await searchCourse(query);
-        setCourses(res);
+        try{
+            const res = await searchCourse(query);
+            setCourses(res);
+        }
+        catch(e){
+            setCourses([]);
+            throw new Error("no course found")
+        }
+
     };
 
     // Update local storage whenever the user state changes
@@ -57,7 +70,7 @@ export const CourseProvider = ({ children }) => {
     }, [courses]);
 
     useEffect(() => {
-        fetchCourses();
+        fetchCourses().then(r => null);
     }, []);
 
     return (
