@@ -2,13 +2,15 @@ import React, { useContext, useState } from 'react';
 import { TextField, Button, Typography, Box } from '@mui/material';
 import { signUpWithEmail, loginWithEmail, forgotPassword, getCurrentUser } from '../firebase/firebase';
 import { CourseContext } from "../contexts/CourseContext";
-import './AuthPage.css'; // Import CSS file for styling the Auth page
+import './AuthPage.css';
+import {useNavigate} from "react-router-dom"; // Import CSS file for styling the Auth page
 
 const AuthPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { setUser } = useContext(CourseContext);
+  const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
@@ -30,12 +32,7 @@ const AuthPage = () => {
   };
 
   const handleForgotPassword = async () => {
-    try {
-      await forgotPassword(email);
-      setError('');
-    } catch (error) {
-      setError(error.message);
-    }
+      navigate('/forgot-password');
   };
 
 

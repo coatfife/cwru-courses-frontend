@@ -18,23 +18,23 @@ import {CourseContext} from "./contexts/CourseContext";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Stats from "./components/Stats";
+import ForgotPasswordPage from "./components/ForgotPasswordPage";
 
 function App() {
     const {user} = useContext(CourseContext);
 
   return (
       <div className="App">
-          {!user ? <AuthPage/> :
               <BrowserRouter>
-                  <NavBar/>
+                  {user && <NavBar/>}
                   <Routes>
-                      <Route path="/" element={<Landing/>}/>
+                      <Route path="/" element={user ? <Landing/> : <AuthPage/>}/>
                       <Route path="/courses" element={<CourseListings/>}/>
                       <Route path="/courses/:id" element={<CoursePage/>}/>
                       <Route path="/stats" element={<Stats/>}/>
+                      <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
                   </Routes>
               </BrowserRouter>
-          }
           <ToastContainer position="bottom-right" />
       </div>
   );
