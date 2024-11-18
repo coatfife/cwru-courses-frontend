@@ -35,6 +35,10 @@ export default function NavBar() {
         setUser(null);
     };
 
+    const handleStats = ()=>{
+        navigate("/stats")
+    }
+
     // Helper function to determine if the button should be active
     const isActive = (path) => {
         if (path === '/') {
@@ -59,6 +63,12 @@ export default function NavBar() {
                         onClick={handleCourses}
                     >
                         Courses
+                    </Button>
+                    <Button
+                        className={`nav-button ${isActive('/courses') ? 'active' : ''}`}  // Add active class for /courses path and its children
+                        onClick={handleStats}
+                    >
+                        Stats
                     </Button>
 
                     <Button

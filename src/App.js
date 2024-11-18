@@ -17,6 +17,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {CourseContext} from "./contexts/CourseContext";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Stats from "./components/Stats";
 
 function App() {
     const {user} = useContext(CourseContext);
@@ -30,6 +31,7 @@ function App() {
                       <Route path="/" element={<Landing/>}/>
                       <Route path="/courses" element={<CourseListings/>}/>
                       <Route path="/courses/:id" element={<CoursePage/>}/>
+                      <Route path="/stats" element={<Stats/>}/>
                   </Routes>
               </BrowserRouter>
           }
