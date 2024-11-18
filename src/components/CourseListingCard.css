@@ -7,6 +7,7 @@
     background-color: #F7F8FF !important; /* Card background color */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for elevation */
     transition: box-shadow 0.3s ease; /* Animation for hover effect */
+    padding: 16px; 
 }
 
 .card:hover {

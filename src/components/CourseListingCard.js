@@ -41,14 +41,17 @@ export default function CourseListingCard({ course }) {
                     <Typography>{calculateRating("overall")}</Typography>
                     <Typography className="rating-label">Overall</Typography>
                 </Box>
+
                 <Box className="rating-badge">
                     <Typography>{calculateRating("difficulty")}</Typography>
                     <Typography className="rating-label">Difficulty</Typography>
                 </Box>
+
                 <Box className="rating-badge">
                     <Typography>{calculateRating("usefulness")}</Typography>
                     <Typography className="rating-label">Useful</Typography>
                 </Box>
+                
                 <CardContent sx={{ textAlign: 'left' }}>
                     <Typography sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '4px' }}>
                         {course.title}

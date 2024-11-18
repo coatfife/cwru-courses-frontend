@@ -1,13 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, Button, Typography, Box } from '@mui/material';
-import { signUpWithEmail, loginWithEmail, forgotPassword, logout, getCurrentUser } from '../firebase/firebase';
-import {CourseContext} from "../contexts/CourseContext";
+import { signUpWithEmail, loginWithEmail, forgotPassword, getCurrentUser } from '../firebase/firebase';
+import { CourseContext } from "../contexts/CourseContext";
+import './AuthPage.css'; // Import CSS file for styling the Auth page
 
 const AuthPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {setUser} = useContext(CourseContext);
+  const { setUser } = useContext(CourseContext);
 
   const handleSignUp = async () => {
     try {
@@ -38,10 +39,13 @@ const AuthPage = () => {
   };
 
 
-  const renderForm = () => {
-
-    return (
-      <Box>
+  return (
+    <Box className="auth-container"> {/* Wrapper container with gradient background */}
+      <Box className="auth-form"> {/* Inner box styled as a card with rounded corners and shadow */}
+        <Box className="auth-header"> {/* Container for the header text */}
+          <h1>Welcome to Rate CWRU Courses!</h1> {/* Main welcome header */}
+          <body1>Please enter your details below.</body1> {/* Subheader message */}
+        </Box>
         <TextField
           label="Email"
           variant="outlined"
@@ -59,7 +63,7 @@ const AuthPage = () => {
           fullWidth
           margin="normal"
         />
-        <Button variant="outlined" onClick={handleSignIn} fullWidth sx={{ mt: 2 }}>
+        <Button variant="outlined" onClick={handleSignIn} fullWidth className="auth-form__button">
           Sign In
         </Button>
         <Button
@@ -68,10 +72,10 @@ const AuthPage = () => {
           fullWidth
           sx={{
             mt: 2,
-            backgroundColor: '#003071',  
-            color: 'white !important',               
+            backgroundColor: '#003071',  // Custom background color for Sign Up button
+            color: 'white !important', // White text for contrast on dark background
             '&:hover': {
-              backgroundColor: '#054398'  
+              backgroundColor: '#054398', // Slightly lighter blue on hover
             }
           }}
         >
@@ -80,19 +84,12 @@ const AuthPage = () => {
         <Button variant="text" onClick={handleForgotPassword} fullWidth sx={{ mt: 2 }}>
           Forgot Password?
         </Button>
-
         {error && (
           <Typography color="error" sx={{ mt: 2 }}>
             {error}
           </Typography>
         )}
       </Box>
-    );
-  };
-
-  return (
-    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 5, p: 3, border: '1px solid lightgray', borderRadius: '8px' }}>
-      {renderForm()}
     </Box>
   );
 };
