@@ -11,7 +11,6 @@ import {CourseContext} from "./contexts/CourseContext";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Stats from "./components/Stats";
-import ForgotPasswordPage from "./components/ForgotPasswordPage";
 
 function App() {
     const {user} = useContext(CourseContext);
@@ -27,7 +26,6 @@ function App() {
                       <Route path="/courses" element={<CourseListings/>}/>
                       <Route path="/courses/:id" element={<CoursePage/>}/>
                       <Route path="/stats" element={<Stats/>}/>
-                      <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
                   </Routes>
                       </>
                   }
