@@ -18,7 +18,6 @@ export const signUpWithEmail = async (email, password) => {
 
     // Send verification email
     await sendEmailVerification(user);
-    console.log('Verification email sent:', user.email);
 
     return user;
   } catch (error) {

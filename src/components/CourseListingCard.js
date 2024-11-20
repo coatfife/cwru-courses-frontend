@@ -1,7 +1,6 @@
 import { Card, CardContent, Typography, Box, Button } from "@mui/material";
 import './CourseListingCard.css';
 import {useContext, useState} from "react";
-import PageContext from "../contexts/PageContext";
 import CreateCourseReview from "./CreateCourseReview";
 import {useNavigate} from "react-router-dom";
 import {CourseContext} from "../contexts/CourseContext";

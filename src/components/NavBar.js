@@ -9,6 +9,7 @@ import { useContext, useState } from 'react';
 import CreateCourseListing from './CreateCourseListing';
 import { logout } from '../firebase/firebase';
 import { CourseContext } from '../contexts/CourseContext';
+import {toast} from "react-toastify";
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -30,9 +31,13 @@ export default function NavBar() {
         navigate('/courses');
     };
 
-    const handleLogout = () => {
-        logout();
-        setUser(null);
+    const handleLogout =async () => {
+        try {
+            await logout(); // Call the logout function to log out the user
+            toast.success("User logged out successfully!");
+        } catch (error) {
+            toast.error("Error during logout:", error);
+        }
     };
 
     const handleStats = ()=>{

@@ -10,6 +10,8 @@ import {
     searchCourse
 } from '../api/api';
 import { getCurrentUser } from "../firebase/firebase";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../firebase/config"
 
 // Create a context for courses
 export const CourseContext = createContext();
@@ -72,6 +74,19 @@ export const CourseProvider = ({ children }) => {
     useEffect(() => {
         fetchCourses().then(r => null);
     }, []);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser); // Update the user state
+            } else {
+                setUser(null); // Reset the user state
+            }
+        });
+
+        return () => unsubscribe(); // Clean up the listener
+    }, []);
+
 
     return (
         <CourseContext.Provider
