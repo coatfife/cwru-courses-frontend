@@ -1,0 +1,17 @@
+.heading {
+    color: #003366;
+    margin-top: 20px;
+}
+.subheading {
+    font-size: 1.2rem;
+    color: #666666; /* Softer text color */
+    margin-top: -8px; /* Slight overlap with the heading for a cohesive look */
+  }
+  
+.divider {
+    width: 80%; /* Adjust based on your layout */
+    height: 1px;
+    background: #ddd; /* Subtle line color */
+    margin: 16px auto; /* Space around the divider */
+  }
+  

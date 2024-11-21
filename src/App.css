@@ -27,6 +27,12 @@
 .App-link {
   color: #61dafb;
 }
+.navbar {
+  border: none; /* Remove any borders */
+  box-shadow: none; /* Remove shadow if it exists */
+}
+
+
 
 .content-container {
   display: flex;

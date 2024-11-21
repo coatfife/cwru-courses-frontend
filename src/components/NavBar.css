@@ -1,9 +1,9 @@
 /* NavBar.css */
 
 .MuiAppBar-root {
-  background-color: #ffffff !important; /* Set the AppBar background to white */
-  box-shadow: none; /* Remove shadow */
-  padding: 12px; /* Add padding */
+  background-color: transparent !important; /* Match gradient's top color */
+  box-shadow: none !important; /* Remove shadow for a smoother look */
+  padding: 8px;
 }
 
 .MuiButton-root {

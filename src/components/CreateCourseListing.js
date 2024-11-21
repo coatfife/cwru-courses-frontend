@@ -42,10 +42,10 @@ export default function CreateCourseListing({ open, onClose }) {
         try{
             await createSingleCourse(newCourse)
             onClose();  // Close modal after submission
-            toast.success("course created successfully!")
+            toast.success("Course created successfully!")
         }
         catch(e){
-            toast.error("failed to create course")
+            toast.error("Failed to create course")
         }
     };
 

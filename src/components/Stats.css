@@ -1,0 +1,37 @@
+/* Container for all content */
+.stats-container {
+    text-align: center; /* Center all content */
+}
+
+/* Styling for the header */
+.header {
+    font-size: 32px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* Styling for the subheader */
+.subheader {
+    font-size: 1.25rem; /* Set the subheader font size */
+    color: #666; /* Light gray color for subheader */
+    margin-bottom: 20px; /* Space between subheader and image */
+}
+/* Styling for the statistics link */
+.statistics-link {
+    font-size: inherit; /* Ensure the font size of the link matches its parent */
+    color: #0066cc; /* Blue link color */
+    text-decoration: none; 
+}
+/* Hover effect for the link */
+.statistics-link:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the image */
+.stats-image {
+    width: 40%;
+    height: auto; /* Ensure aspect ratio is maintained */
+    margin-top: 20px;
+    border-radius: 8px;
+    object-fit: cover; /* Keeps the aspect ratio and ensures the image fills the container */
+}
