@@ -1,8 +1,20 @@
-/* SearchBar.css */
+/* Container for the search bar */
 .search-bar-container {
     display: flex;
     justify-content: center; /* Centers horizontally */
-    align-items: flex-start; /* Aligns items to the top */
-    /* Remove height: 100vh; */
-    margin-top: 0; /* Remove margin here to control spacing from App.css */
+    align-items: center; /* Aligns items to the center vertically */
+    margin-top: 20px; /* Add some top margin for spacing */
+    padding: 10px; /* Padding around the container for breathing space */
+}
+
+
+/* Focus and hover effect */
+.search-bar-container input:focus {
+    outline: 2px solid #0066cc; /* Blue outline on focus */
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.4); /* Darker blue shadow on focus */
+}
+
+/* Optional: Hover effect on the input (without focusing) */
+.search-bar-container input:hover {
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.2); /* Lighter blue shadow on hover */
 }
