@@ -8,7 +8,6 @@ export default function Landing() {
     <>    
       <h1 className="heading">Rate CWRU Courses</h1>
       <p className="subheading">Find and share course reviews to help students like you.</p>
-      <div className="divider"></div>
       <SearchBar />
       
       {/* Add the image under the heading and search bar */}
