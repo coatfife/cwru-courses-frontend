@@ -10,7 +10,7 @@ const Stats = () => {
             {/* Subheader with embedded link */}
             <p className="subheader">
                 Explore statistics and insights about CWRU course reviews <a 
-                    href="https://www.npmjs.com/package/react-toastify" 
+                    href="https://long-fire-3158.ploomberapp.io/"
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="statistics-link"

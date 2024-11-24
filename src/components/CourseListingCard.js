@@ -55,9 +55,20 @@ export default function CourseListingCard({ course }) {
                     <Typography sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '4px' }}>
                         {course.title}
                     </Typography>
-                    <Typography sx={{ fontSize: '1rem', color: '#666', marginBottom: '8px' }}>
+                    <Typography
+                        sx={{
+                            fontSize: '1rem',
+                            color: '#666',
+                            marginBottom: '8px',
+                            display: '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                            WebkitLineClamp: 3, // Limits the description to 3 lines
+                        }}
+                    >
                         {course.description}
                     </Typography>
+
                     <Typography sx={{ fontSize: '0.85rem', color: '#999', marginBottom: '16px' }}>
                         {course.reviews.length === 1 ? `${course.reviews.length} review` : `${course.reviews.length} reviews`}
                     </Typography>
