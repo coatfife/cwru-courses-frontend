@@ -1,4 +1,4 @@
-const api_uri = 'https://tzui4wlphi.execute-api.us-east-1.amazonaws.com/prod/';
+const api_uri = 'https://q3j9h4ici8.execute-api.us-east-1.amazonaws.com/prod/';
 
 const sendRequest = async (data, method, endpoint = "courses/") => {
     try {
