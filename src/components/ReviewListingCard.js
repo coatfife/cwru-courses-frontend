@@ -33,7 +33,7 @@ export default function ReviewListingCard({ course, review }) {
     };
 
     const handleDelete = async () => {
-        await deleteReview(course.courseId, review.reviewId);
+        await deleteReview(course.name, course.code, review.reviewId);
         await fetchCourses();
     };
 

@@ -1,6 +1,6 @@
 const api_uri = 'https://q3j9h4ici8.execute-api.us-east-1.amazonaws.com/prod/';
 
-const sendRequest = async (data, method, endpoint = "courses/") => {
+const sendRequest = async (data, method, endpoint = "courses/", queryParams = "") => {
     try {
         const options = {
             method: method,
@@ -13,7 +13,10 @@ const sendRequest = async (data, method, endpoint = "courses/") => {
             options.body = JSON.stringify(data);
         }
 
-        const response = await fetch(`${api_uri}${endpoint}`, options);
+        // Add query parameters to the endpoint
+        const url = `${api_uri}${endpoint}${queryParams ? `?${queryParams}` : ""}`;
+
+        const response = await fetch(url, options);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -32,9 +35,10 @@ export const getCourses = async () => {
     return await sendRequest({}, "GET", "courses");
 };
 
-// Function to get a specific course by courseId
-export const getCourseById = async (courseId) => {
-    return await sendRequest({}, "GET", `courses/?courseId=${courseId}`);
+// Function to get a specific course by name and code
+export const getCourseByNameAndCode = async (name, code) => {
+    const queryParams = `name=${name}&code=${code}`;
+    return await sendRequest({}, "GET", "courses", queryParams);
 };
 
 // Function to create a new course
@@ -42,32 +46,37 @@ export const createCourse = async (courseData) => {
     return await sendRequest(courseData, "POST", "courses");
 };
 
-// Function to update a course by courseId
-export const updateCourse = async (courseId, updatedData) => {
-    return await sendRequest(updatedData, "PUT", `courses/?courseId=${courseId}`);
+// Function to update a course by name and code
+export const updateCourse = async (name, code, updatedData) => {
+    const queryParams = `name=${name}&code=${code}`;
+    return await sendRequest(updatedData, "PUT", "courses", queryParams);
 };
 
-// Function to delete a course by courseId
-export const deleteCourse = async (courseId) => {
-    return await sendRequest({}, "DELETE", `courses/?courseId=${courseId}`);
+// Function to delete a course by name and code
+export const deleteCourse = async (name, code) => {
+    const queryParams = `name=${name}&code=${code}`;
+    return await sendRequest({}, "DELETE", "courses", queryParams);
 };
 
 // Function to create a review for a course
-export const createReview = async (courseId, reviewData) => {
-        return await sendRequest(reviewData, "POST", `reviews/?courseId=${courseId}`);
+export const createReview = async (name, code, reviewData) => {
+    const queryParams = `name=${name}&code=${code}`;
+    return await sendRequest(reviewData, "POST", "reviews", queryParams);
 };
 
 // Function to update a review by reviewId
-export const updateReview = async (courseId, reviewId, updatedData) => {
-    return await sendRequest(updatedData, "PUT", `reviews/?courseId=${courseId}&reviewId=${reviewId}`);
+export const updateReview = async (name, code, reviewId, updatedData) => {
+    const queryParams = `name=${name}&code=${code}&reviewId=${reviewId}`;
+    return await sendRequest(updatedData, "PUT", "reviews", queryParams);
 };
 
 // Function to delete a review by reviewId
-export const deleteReview = async (courseId, reviewId) => {
-    return await sendRequest({}, "DELETE", `reviews/?courseId=${courseId}&reviewId=${reviewId}`);
+export const deleteReview = async (name, code, reviewId) => {
+    const queryParams = `name=${name}&code=${code}&reviewId=${reviewId}`;
+    return await sendRequest({}, "DELETE", "reviews", queryParams);
 };
 
-// Function to search a course matching a query
+// Function to search for courses matching a query
 export const searchCourse = async (query) => {
-    return await sendRequest({query}, "POST", "search");
+    return await sendRequest({ query }, "POST", "search");
 };

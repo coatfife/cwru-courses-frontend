@@ -74,7 +74,7 @@ export default function CreateCourseReview({ onClose, course, review }) {
                 professor,
             };
             try{
-                await updateReview(course.courseId, review.reviewId, updatedReview);
+                await updateReview(course.name, course.code, review.reviewId, updatedReview);
                 toast.success("Review updated successfully!")
             }
             catch(e){
@@ -98,7 +98,7 @@ export default function CreateCourseReview({ onClose, course, review }) {
             };
 
             try{
-                await createReview(course.courseId, newReview);
+                await createReview(course.name, course.code, newReview);
                 toast.success("review submitted successfully!")
             }
             catch(e){
