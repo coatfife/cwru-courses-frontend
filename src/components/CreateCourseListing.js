@@ -12,6 +12,7 @@ export default function CreateCourseListing({ open, onClose }) {
         crossListings: '',
         prerequisites: '',
         description: '',
+        code:'',
     });
 
     // Handle input changes
@@ -32,7 +33,8 @@ export default function CreateCourseListing({ open, onClose }) {
         const prereq = formValues.prerequisites ? formValues.prerequisites.split(',').map(item => item.trim()) : [];
         const newCourse = {
             courseId: uuidv4(),
-            title: formValues.name,
+            name: formValues.name,
+            code: formValues.code,
             createdBy: user?.email || "elm102@case.edu",
             description: formValues.description,
             aliases: alias,
@@ -60,7 +62,6 @@ export default function CreateCourseListing({ open, onClose }) {
                 <CardContent sx={{ overflowY: 'auto', maxHeight: '80vh' }}>
                     <FormControl component="form" sx={{ width: '100%' }} onSubmit={handleSubmit}>
                         <Typography variant='h6' mb={2}><b>Create Course Listing</b></Typography>
-                        <Typography mb={3}>Created by: abc123</Typography>
 
                         <FormLabel>Name</FormLabel>
                         <TextField
@@ -68,6 +69,16 @@ export default function CreateCourseListing({ open, onClose }) {
                             value={formValues.name}
                             onChange={handleChange}
                             placeholder='e.g. Programming Language Concepts'
+                            multiline
+                            fullWidth
+                            sx={{ mb: 3 }}
+                        />
+                        <FormLabel>Course Code</FormLabel>
+                        <TextField
+                            name="code"
+                            value={formValues.code}
+                            onChange={handleChange}
+                            placeholder='e.g. CSDS 345'
                             multiline
                             fullWidth
                             sx={{ mb: 3 }}
