@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Box, Typography, Button, Stack } from "@mui/material";
 import CourseListingCard from "./CourseListingCard";
 import SearchBar from "./SearchBar";
@@ -8,6 +8,11 @@ export default function CourseListings() {
     const { courses } = useContext(CourseContext);
     const [currentPage, setCurrentPage] = useState(1); // State to track the current page
     const coursesPerPage = 15; // Number of courses to display per page
+
+    // Reset currentPage to 1 when courses change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [courses]);
 
     // Calculate the index range for courses on the current page
     const startIndex = (currentPage - 1) * coursesPerPage;
@@ -101,7 +106,7 @@ export default function CourseListings() {
                     Next
                 </Button>
             </Stack>
-            <br/>
+            <br />
         </>
     );
 }
