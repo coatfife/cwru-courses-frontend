@@ -3,15 +3,89 @@ import {
     CardContent,
     Typography,
     Box,
-    IconButton,
     Button,
 } from "@mui/material";
-import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import { useContext, useState } from "react";
-import "./CourseListingCard.css";
 import { CourseContext } from "../contexts/CourseContext";
 import CreateCourseReview from "./CreateCourseReview";
 
+// Styles
+const styles = {
+    ratingsSection: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        flex: "0 0 100px",
+        padding: "16px",
+        backgroundColor: "#f9f9f9",
+        gap: "12px",
+    },
+    ratingBadge: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundColor: "#ffffff",
+        borderRadius: "8px",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        padding: "8px",
+        width: "80px",
+        textAlign: "center",
+    },
+    ratingValue: {
+        fontSize: "1.2rem",
+        fontWeight: "bold",
+        color: "#1976d2",
+    },
+    ratingLabel: {
+        fontSize: "0.85rem",
+        color: "#666",
+    },
+    cardContent: {
+        textAlign: "left",
+        padding: "16px",
+    },
+    authorInfo: {
+        display: "flex",
+        color: "black",
+        fontSize: "1rem",
+        marginBottom: "8px",
+    },
+    authorLabel: {
+        fontWeight: "bold",
+        marginRight: "8px",
+    },
+    buttonGroup: {
+        display: "flex",
+        gap: "16px",
+        marginTop: "16px",
+    },
+    editButton: {
+        borderRadius: "100px",
+        borderColor: "#003071",
+        color: "#003071",
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        padding: "6px 12px",
+        '&:hover': {
+            backgroundColor: '#EDEDED',
+            color: 'white',
+            borderColor: '#003071',
+        },
+    },
+    deleteButton: {
+        borderRadius: "100px",
+        backgroundColor: "#EB4B4B",
+        color: "white",
+        padding: "6px 12px",
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        '&:hover': {
+            backgroundColor: "#e53935",
+        },
+    },
+};
+
+// Function to format date
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleString("en-US", {
@@ -25,12 +99,7 @@ function formatDate(dateString) {
 }
 
 export default function ReviewListingCard({ course, review }) {
-    const [showMore, setShowMore] = useState(false);
     const { user, deleteReview, fetchCourses } = useContext(CourseContext);
-
-    const handleToggle = () => {
-        setShowMore(!showMore);
-    };
 
     const handleDelete = async () => {
         await deleteReview(course.name, course.code, review.reviewId);
@@ -50,97 +119,71 @@ export default function ReviewListingCard({ course, review }) {
     return (
         <>
             <Card className="card" sx={{ cursor: "pointer" }}>
-                <Box className="card-content">
-                    <Box className="rating-badge">
-                        <Typography>{review.overall}</Typography>
-                        <Typography className="rating-label">Overall</Typography>
+                <Box className="card-content" sx={{ display: "flex" }}>
+                    {/* Left Section - Ratings */}
+                    <Box sx={styles.ratingsSection}>
+                        <Box sx={styles.ratingBadge}>
+                            <Typography sx={styles.ratingValue}>{review.overall}</Typography>
+                            <Typography sx={styles.ratingLabel}>Overall</Typography>
+                        </Box>
+                        <Box sx={styles.ratingBadge}>
+                            <Typography sx={styles.ratingValue}>{review.difficulty}</Typography>
+                            <Typography sx={styles.ratingLabel}>Difficulty</Typography>
+                        </Box>
+                        <Box sx={styles.ratingBadge}>
+                            <Typography sx={styles.ratingValue}>{review.usefulness}</Typography>
+                            <Typography sx={styles.ratingLabel}>Useful</Typography>
+                        </Box>
                     </Box>
-                    <Box className="rating-badge">
-                        <Typography>{review.difficulty}</Typography>
-                        <Typography className="rating-label">Difficulty</Typography>
-                    </Box>
-                    <Box className="rating-badge">
-                        <Typography>{review.usefulness}</Typography>
-                        <Typography className="rating-label">Useful</Typography>
-                    </Box>
-                    <CardContent sx={{ textAlign: "left" }}>
-                        <Box sx={{ display: "flex", color: "black", fontSize: "1rem", mb: 1 }}>
-                            <Typography sx={{ fontWeight: "bold", mr: 1 }}>Author:</Typography>
+
+                    {/* Right Section - Review Content */}
+                    <Box sx={styles.cardContent}>
+                        <Box sx={styles.authorInfo}>
+                            <Typography sx={styles.authorLabel}>Author:</Typography>
                             <Typography>{review.anonymous ? "Anonymous" : review.createdBy}</Typography>
                         </Box>
-                        <Box sx={{ display: "flex", color: "black", fontSize: "1rem", mb: 1 }}>
-                            <Typography sx={{ fontWeight: "bold", mr: 1 }}>Tips:</Typography>
+                        <Box sx={styles.authorInfo}>
+                            <Typography sx={styles.authorLabel}>Tips:</Typography>
                             <Typography>{review.tips}</Typography>
                         </Box>
-                        <Box sx={{ display: "flex", color:"black", fontSize: "1rem", mb: 1 }}>
-                            <Typography sx={{ fontWeight: "bold", mr: 1 }}>Major:</Typography>
+                        <Box sx={styles.authorInfo}>
+                            <Typography sx={styles.authorLabel}>Major:</Typography>
                             <Typography>{review.major}</Typography>
                         </Box>
 
-                        {showMore && (
-                            <>
-                                <Box sx={{ display: "flex", color: "black", fontSize: "1rem", mb: 1 }}>
-                                    <Typography sx={{ fontWeight: "bold", mr: 1 }}>Additional Comments:</Typography>
-                                    <Typography>{review.additionalComments}</Typography>
-                                </Box>
-                                <Box sx={{ display: "flex", color: "black", fontSize: "1rem", mb: 1 }}>
-                                    <Typography sx={{ fontWeight: "bold", mr: 1 }}>Created At:</Typography>
-                                    <Typography>{formatDate(review.createdAt)}</Typography>
-                                </Box>
-                            </>
-                        )}
-
-                        <IconButton onClick={handleToggle}>
-                            {showMore ? <ExpandLess /> : <ExpandMore />}
-                        </IconButton>
+                        {/* Always rendered details */}
+                        <Box sx={styles.authorInfo}>
+                            <Typography sx={styles.authorLabel}>Additional Comments:</Typography>
+                            <Typography>{review.additionalComments}</Typography>
+                        </Box>
+                        <Box sx={styles.authorInfo}>
+                            <Typography sx={styles.authorLabel}>Created At:</Typography>
+                            <Typography>{formatDate(review.createdAt)}</Typography>
+                        </Box>
 
                         {user.email === review.createdBy && (
-                            <Box>
-                               <Button
+                            <Box sx={styles.buttonGroup}>
+                                <Button
                                     onClick={handleOpenReviewModal}
-                                    variant="outlined" // Use outlined variant for Edit button
-                                    sx={{
-                                        borderRadius: '100px', // Rounded corners with 100px radius
-                                        borderColor: '#003071', // Blue border for the Edit button
-                                        color: '#003071', // Blue text color for the Edit button
-                                        marginRight: '16px', // Spacing between Edit and Delete
-                                        fontWeight: 'bold',
-                                        textTransform: 'uppercase',
-                                        padding: '6px 12px',
-                                        transition: 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease',
-                                        '&:hover': {
-                                            backgroundColor: 'EDEDED', 
-                                            color: 'white', // White text on hover
-                                            borderColor: '#003071', // Blue border on hover
-                                        }
-                                    }}
+                                    variant="outlined"
+                                    sx={styles.editButton}
                                 >
                                     Edit
                                 </Button>
 
                                 <Button
                                     onClick={handleDelete}
-                                    variant="contained" // Keep "contained" for Delete button (solid background)
-                                    sx={{
-                                        borderRadius: '100px', // Rounded corners with 100px radius
-                                        backgroundColor: '#EB4B4B', // Red background for the Delete button
-                                        color: 'white' , // White text for the Delete button
-                                        padding: '6px 12px',
-                                        fontWeight: 'bold',
-                                        textTransform: 'uppercase',
-                                        transition: 'background-color 0.3s ease',
-                                        '&:hover': {
-                                            backgroundColor: '#e53935', // Darker red on hover
-                                        }
-                                    }}
+                                    variant="contained"
+                                    sx={styles.deleteButton}
                                 >
                                     Delete
-</Button>
+                                </Button>
                             </Box>
                         )}
-                    </CardContent>
+                    </Box>
                 </Box>
             </Card>
+
             {isReviewModalOpen && (
                 <CreateCourseReview
                     setOpenModal={isReviewModalOpen}

@@ -25,14 +25,14 @@
     flex-direction: column; /* Stack label and rating vertically */
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     background-color: #003366; /* Background color for the badge */
     color: white; /* Text color */
-    font-size: 1.4rem; /* Font size for rating */
+    font-size: 1.0rem; /* Font size for rating */
     font-weight: bold; /* Bold text */
     border-radius: 50%; /* Make the badge circular */
-    margin-right: 16px; /* Space between badge and text */
+    margin-right: 20px; /* Space between badge and text */
     position: relative; /* For absolute positioning of the label */
  
 }

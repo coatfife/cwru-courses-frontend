@@ -1,11 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import Popover from '@mui/material/Popover';
+import { Paper, InputBase, IconButton, Popover } from '@mui/material';
+import { Menu as MenuIcon, Search as SearchIcon } from '@mui/icons-material';
 import { CourseContext } from "../contexts/CourseContext";
 import { toast } from "react-toastify";
 import './SearchBar.css';
@@ -25,21 +21,9 @@ function SearchBar() {
         }
     };
 
-    const handlePopoverOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'course-popover' : undefined;
-
-    const handleCourseClick = (courseId) => {
-        // Navigate to the course details page or perform any other action
-        navigate(`/courses/${courseId}`);
-    };
+    const handlePopoverOpen = (event) => setAnchorEl(event.currentTarget);
+    const handlePopoverClose = () => setAnchorEl(null);
+    const handleCourseClick = (courseId) => navigate(`/courses/${courseId}`);
 
     return (
         <div className="search-bar-container">
@@ -82,25 +66,18 @@ function SearchBar() {
             </Paper>
 
             <Popover
-                id={id}
-                open={open}
+                open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
                 onClose={handlePopoverClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
-                <div style={{ padding: '8px', maxHeight: '300px', overflowY: 'auto' }}>
-                    {courses.map(course => (
+                <div className="popover-content">
+                    {courses.map((course) => (
                         <div
                             key={course.courseId}
+                            className="popover-item"
                             onClick={() => handleCourseClick(course.courseId)}
-                            style={{ padding: '8px', cursor: 'pointer' }}
                         >
                             {course.title}
                         </div>
