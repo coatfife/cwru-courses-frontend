@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReviewListingCard from "./ReviewListingCard";
 
 export default function CoursePage() {
-    const { courses } = useContext(CourseContext);
+    const { courses, user } = useContext(CourseContext);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -15,18 +15,27 @@ export default function CoursePage() {
         navigate('/');
     }
 
-    console.log("course being looked at ", course);
-
     // Pagination setup
     const [currentPage, setCurrentPage] = useState(1);
     const reviewsPerPage = 8;
 
+    // Sort reviews to ensure that reviews by the current user appear first
+    const sortedReviews = course.reviews.sort((a, b) => {
+        if (a.createdBy === user.email && b.createdBy !== user.email) {
+            return -1; // 'a' comes first
+        }
+        if (b.createdBy === user.email && a.createdBy !== user.email) {
+            return 1; // 'b' comes first
+        }
+        return a.createdAt - b.createdAt; // Sort by date if neither is by the user
+    });
+
     // Calculate the indexes for slicing the reviews
     const indexOfLastReview = currentPage * reviewsPerPage;
     const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-    const currentReviews = course.reviews.slice(indexOfFirstReview, indexOfLastReview);
+    const currentReviews = sortedReviews.slice(indexOfFirstReview, indexOfLastReview);
 
-    const totalPages = Math.ceil(course.reviews.length / reviewsPerPage);
+    const totalPages = Math.ceil(sortedReviews.length / reviewsPerPage);
 
     // Pagination handlers
     const handleNextPage = () => {
@@ -155,7 +164,6 @@ export default function CoursePage() {
                 >
                     Next
                 </Button>
-
             </Box>
             <br/>
         </>

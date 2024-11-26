@@ -19,7 +19,6 @@ export const signUpWithEmail = async (email, password) => {
     // Send verification email
     await sendEmailVerification(user);
 
-    return user;
   } catch (error) {
     console.error('Error signing up:', error);
     throw error;
