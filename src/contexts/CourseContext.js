@@ -35,26 +35,26 @@ export const CourseProvider = ({ children }) => {
     };
 
     const fetchCourses = async () => {
-        try{
+        try {
             const res = await getCourses();
-            setCourses(res);
-        }
-        catch(e){
+            // Sort courses by title before setting the state
+            const sortedCourses = res.sort((a, b) => a.title.localeCompare(b.title));
+            setCourses(sortedCourses);
+        } catch (e) {
             console.log(e);
         }
-
     };
 
     const search = async (query) => {
-        try{
+        try {
             const res = await searchCourse(query);
-            setCourses(res);
-        }
-        catch(e){
+            // Sort the search results by title
+            const sortedCourses = res.sort((a, b) => a.title.localeCompare(b.title));
+            setCourses(sortedCourses);
+        } catch (e) {
             setCourses([]);
-            throw new Error("no course found")
+            throw new Error("no course found");
         }
-
     };
 
     // Update local storage whenever the user state changes
