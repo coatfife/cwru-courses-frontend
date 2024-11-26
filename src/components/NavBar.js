@@ -2,19 +2,18 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './NavBar.css';
 import { useContext, useState } from 'react';
 import CreateCourseListing from './CreateCourseListing';
 import { logout } from '../firebase/firebase';
 import { CourseContext } from '../contexts/CourseContext';
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function NavBar() {
     const navigate = useNavigate();
-    const { setUser, fetchCourses } = useContext(CourseContext);
-    const location = useLocation();  // Get current location
+    const { fetchCourses } = useContext(CourseContext);
+    const location = useLocation();
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -31,64 +30,60 @@ export default function NavBar() {
         navigate('/courses');
     };
 
-    const handleLogout =async () => {
+    const handleLogout = async () => {
         try {
-            await logout(); // Call the logout function to log out the user
+            await logout();
             toast.success("User logged out successfully!");
         } catch (error) {
             toast.error("Error during logout:", error);
         }
     };
 
-    const handleStats = ()=>{
-        navigate("/stats")
-    }
+    const handleStats = () => {
+        navigate("/stats");
+    };
 
-    // Helper function to determine if the button should be active
     const isActive = (path) => {
         if (path === '/') {
-            return location.pathname === '/'; // Exact match for the home page
+            return location.pathname === '/';
         }
-        return location.pathname.startsWith(path);  // Check for any path starting with '/courses'
+        return location.pathname.startsWith(path);
     };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ boxShadow: 'none' }}>
-                <Toolbar sx={{ justifyContent: 'flex-end' }}>
-                    <Button
-                        className={`nav-button ${isActive('/') ? 'active' : ''}`}  // Add active class for exact match
+            <AppBar position="static" sx={{ boxShadow: 'none', backgroundColor: '#ffffff' }}>
+                <Toolbar sx={{ justifyContent: 'flex-end', gap: '20px' }}>
+                    <h3
+                        className={`nav-item ${isActive('/') ? 'active' : ''}`}
                         onClick={handleHome}
                     >
                         Home
-                    </Button>
-
-                    <Button
-                        className={`nav-button ${isActive('/courses') ? 'active' : ''}`}  // Add active class for /courses path and its children
+                    </h3>
+                    <h3
+                        className={`nav-item ${isActive('/courses') ? 'active' : ''}`}
                         onClick={handleCourses}
                     >
                         Courses
-                    </Button>
-                    <Button
-                        className={`nav-button ${isActive('/courses') ? 'active' : ''}`}  // Add active class for /courses path and its children
+                    </h3>
+                    <h3
+                        className={`nav-item ${isActive('/stats') ? 'active' : ''}`}
                         onClick={handleStats}
                     >
                         Stats
-                    </Button>
-
-                    <Button
-                        className="create-course-button"
+                    </h3>
+                    <h3
+                        className="nav-item"
                         onClick={handleOpenModal}
                     >
-                        Create Course Listing
-                    </Button>
-
-                    <Button
-                        className="logout-button"
+                        Create Course
+                    </h3>
+                    <h3
+                        className="nav-item"
                         onClick={handleLogout}
                     >
                         Logout
-                    </Button>
+                    </h3>
                     <CreateCourseListing open={modalOpen} onClose={handleCloseModal} />
                 </Toolbar>
             </AppBar>
