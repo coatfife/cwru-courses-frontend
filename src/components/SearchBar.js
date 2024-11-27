@@ -6,16 +6,22 @@ import { CourseContext } from "../contexts/CourseContext";
 import { toast } from "react-toastify";
 import './SearchBar.css';
 
-function SearchBar() {
+function SearchBar({ location = 'landing' }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
-    const { search, courses } = useContext(CourseContext);
+    const { search, courses, fetchCourses } = useContext(CourseContext);
 
     const handleSearch = async () => {
+        if(searchQuery === ""){
+            await fetchCourses();
+            return;
+        }
         try {
             await search(searchQuery);
-            navigate(`/courses`);
+            if (location === 'landing') {
+                navigate(`/courses`);
+            }
         } catch (e) {
             toast.error(e.message);
         }
